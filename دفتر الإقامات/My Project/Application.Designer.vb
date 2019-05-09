@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Iqama_Expiry_Manager.frmMain
+            Me.MainForm = Global.دفتر_الإقامات.frmMain
         End Sub
     End Class
 End Namespace

@@ -4,8 +4,6 @@ Public Class frmMain
     'Even though this is neat and dandy, the Add20 function will need to be updated accordingly, namely the MagicNumber.
     Public Const strFormat As String = "dd / MM / yyyy"
     Public Const strTrimmedFormat As String = "d/M/yyyy"
-    Public Const strSimplfiedFormat As String = "d/M/yy"
-    Public Const MagicNumber As Integer = 3
 
     'Checks the full list and sets the forecolor accordingly. Fixes broken date formats (for whatever reason), and saves the list.
     Sub RefreshList()
@@ -14,8 +12,8 @@ Public Class frmMain
 
         For Each subject As ListViewItem In lstData.Items
 
-            Dim Name As ListViewItem.ListViewSubItem = subject.SubItems(0)
-            Dim Number As ListViewItem.ListViewSubItem = subject.SubItems(1)
+            Dim Number As ListViewItem.ListViewSubItem = subject.SubItems(0)
+            Dim Name As ListViewItem.ListViewSubItem = subject.SubItems(1)
             Dim Expiry As ListViewItem.ListViewSubItem = subject.SubItems(2)
 
             Dim Diff As Long
@@ -39,15 +37,15 @@ Public Class frmMain
             Select Case Diff
                 Case Is < 1
                     subject.StateImageIndex = 3
-                Case Is <= 60
+                Case Is <= 30
                     subject.StateImageIndex = 1
-                Case Is <= 90
+                Case Is <= 60
                     subject.StateImageIndex = 2
                 Case Else
                     subject.StateImageIndex = 0
             End Select
             If Save.Length <> 0 Then Save.Append("|")
-            Save.Append(subject.Text)
+            Save.Append(Name.Text)
             Save.Append("#")
             Save.Append(Number.Text)
             Save.Append("#")
@@ -138,7 +136,8 @@ Public Class frmMain
             If RetrivedData = "" Then Exit Sub
             Dim SplitupData As String() = Split(RetrivedData, "|")
             For Each Current As String In SplitupData
-                CreateListViewItem(Split(Current, "#"))
+                Dim x As String() = Split(Current, "#")
+                CreateListViewItem({x(1), x(0), x(2)})
             Next
             RefreshList()
         Catch
@@ -219,7 +218,7 @@ Public Class frmMain
 
     Dim Lastcolumn As Integer = -1
     Private Sub lstData_ColumnClick(sender As Object, e As ColumnClickEventArgs) Handles lstData.ColumnClick
-
+        ConfirmQuickEdit()
 
         Static Descending As Boolean = False
 
@@ -275,9 +274,10 @@ Public Class frmMain
             txtFastEdit.MaxLength = 255
             If .SubItems(1).Bounds.Contains(position) Then
                 index = 1
-                txtFastEdit.MaxLength = 10
             ElseIf .SubItems(2).Bounds.Contains(position) Then
                 index = 2
+            Else
+                txtFastEdit.MaxLength = 10
             End If
             curRow = .Index
             curCol = index
@@ -292,49 +292,47 @@ Public Class frmMain
 
     End Sub
 
-    Function Valid() As Boolean
-        Dim txt As String = txtFastEdit.Text
-        Select Case curCol
-            Case 0
-                If txt = "" Then Return False
-            Case 1
-                If txt.Length <> 10 Then Return False
-            Case 2
-                Dim newdate As Date
-                If DateTime.TryParseExact(txt, strTrimmedFormat, Nothing, Globalization.DateTimeStyles.AllowWhiteSpaces, newdate) = False Then
-                    Return False
-                Else
-                    txtFastEdit.Text = Format(newdate, strFormat)
-                End If
-        End Select
-        Return True
-    End Function
+    Sub ConfirmQuickEdit(Optional Cancel As Boolean = False)
+        If txtFastEdit.Visible = True Then
 
-    Private Sub txtFastEdit_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFastEdit.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Valid() Then
-                lstData.Items(curRow).SubItems(curCol).Text = txtFastEdit.Text
-                RefreshList()
+            If Not Cancel Then
+                Dim txt As String = txtFastEdit.Text
+                Dim result As Boolean = True
+                Select Case curCol
+                    Case 0
+                        If txt.Length <> 10 Or Not IsNumeric(txt) Then result = False
+                    Case 1
+                        If txt = "" Then result = False
+                    Case 2
+                        Dim newdate As Date
+                        If DateTime.TryParseExact(txt, strTrimmedFormat, Nothing, Globalization.DateTimeStyles.AllowWhiteSpaces, newdate) = False Then
+                            result = False
+                        Else
+                            txtFastEdit.Text = Format(newdate, strFormat)
+                        End If
+                End Select
+                If result Then
+                    lstData.Items(curRow).SubItems(curCol).Text = txtFastEdit.Text
+                    RefreshList()
+                End If
             End If
             txtFastEdit.Visible = False
             lstData.Focus()
+
+        End If
+    End Sub
+
+    Private Sub txtFastEdit_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFastEdit.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            ConfirmQuickEdit()
         ElseIf e.KeyCode = Keys.Escape Then
-            txtFastEdit.Visible = False
-            lstData.Focus()
+            ConfirmQuickEdit(True)
         End If
     End Sub
 
 
     Private Sub lstData_MouseClick(sender As Object, e As MouseEventArgs) Handles lstData.MouseClick
-        If txtFastEdit.Visible = True Then
-            If Valid() Then
-                lstData.Items(curRow).SubItems(curCol).Text = txtFastEdit.Text
-                RefreshList()
-            End If
-           
-            txtFastEdit.Visible = False
-            lstData.Focus()
-        End If
+            ConfirmQuickEdit()
     End Sub
 
     Private Sub txtFastEdit_TextChanged(sender As Object, e As EventArgs) Handles txtFastEdit.TextChanged
@@ -346,5 +344,9 @@ Public Class frmMain
             Beep()
             txtFastEdit.Text = txtFastEdit.Text.Remove(InStr(txtFastEdit.Text, "|") - 1, 1)
         End If
+    End Sub
+
+    Private Sub SaveLocationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveLocationToolStripMenuItem.Click
+        Process.Start(Application.LocalUserAppDataPath)
     End Sub
 End Class

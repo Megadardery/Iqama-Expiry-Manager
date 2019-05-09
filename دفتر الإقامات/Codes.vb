@@ -43,10 +43,7 @@ Module Codes
 
         For Each c As Char In Str
             If lastChar = c Then
-                If SpecificChar = "" Then
-                    Continue For
-                End If
-                If c = SpecificChar Then Continue For
+                If SpecificChar = "" OrElse c = SpecificChar Then Continue For
             End If
             sb.Append(c)
             lastChar = c
@@ -65,7 +62,7 @@ Module Codes
         For x As Integer = 0 To FullText.Length - 1
             FullText(x) = StrUnDup(FullText(x), vbTab)
             strCurrent = Split(FullText(x), Delimiter)
-            If strCurrent(0).Trim = "" Then Continue For
+            If strCurrent(1).Trim = "" Then Continue For
             If strCurrent(0).Trim.StartsWith("[") = True Then Continue For
 
             If strCurrent.Length <> 3 Then
@@ -74,7 +71,7 @@ Module Codes
                 Exit Function
             End If
 
-            If strCurrent(0).Trim.Length > 255 Or strCurrent(0).Contains("#") Or strCurrent(0).Contains("|") Then
+            If strCurrent(1).Trim.Length > 255 Or strCurrent(1).Contains("#") Or strCurrent(1).Contains("|") Then
                 MsgBox(String.Format("لم يتمكن البرنامج من قراءة اسم صحيح في السطر {1}. من فضلك تأكد ثم حاول مجدداً.", x + 1), RtExlmn)
                 Return Nothing
                 Exit Function
@@ -91,7 +88,7 @@ Module Codes
                 Return Nothing
                 Exit Function
             End If
-            If strCurrent(1).Trim.Length <> 10 Then
+            If strCurrent(0).Trim.Length <> 10 OrElse Not IsNumeric(strCurrent(0).Trim) Then
                 MsgBox(String.Format("لم يتمكن البرنامج من قراءة رقم إقامة صحيح في السطر {1}. من فضلك تأكد ثم حاول مجدداً.", x + 1), RtExlmn)
                 Return Nothing
                 Exit Function
@@ -138,11 +135,9 @@ Module Codes
     End Sub
 
     Sub ImportDatabase(FileName As String)
-        Dim Retrived As String() = frmDatabase.ShowDialog()
-        If Retrived Is Nothing Then Exit Sub
 
         Dim Connection As New OdbcConnection("Driver={Microsoft Access Driver (*.mdb)};Dbq=")
-        Dim DataAdapter As New OdbcDataAdapter("SELECT * FROM " & Retrived(0), Connection)
+        Dim DataAdapter As New OdbcDataAdapter("SELECT * FROM Table1", Connection)
         Dim CommandBuilder As New OdbcCommandBuilder(DataAdapter)
         Dim DataTable As New DataTable
         Try
@@ -161,9 +156,9 @@ Module Codes
             DataTable = DataView.ToTable()
             Dim items As New List(Of ListViewItem)
             For Each subject As DataRow In DataTable.Rows
-                Dim X As New ListViewItem(subject(Retrived(1)).ToString)
-                X.SubItems.Add(subject(Retrived(2)).ToString)
-                X.SubItems.Add(Format(DateTime.ParseExact(subject(Retrived(3)), frmMain.strTrimmedFormat, Nothing, Globalization.DateTimeStyles.AllowWhiteSpaces), frmMain.strFormat))
+                Dim X As New ListViewItem(subject(0).ToString)
+                X.SubItems.Add(subject(1).ToString)
+                X.SubItems.Add(Format(DateTime.ParseExact(subject(2), frmMain.strTrimmedFormat, Nothing, Globalization.DateTimeStyles.AllowWhiteSpaces), frmMain.strFormat))
                 items.Add(X)
             Next
             If (frmMain.lstData.Items.Count <> 0 And frmExport.chkClear.Checked = True) AndAlso MsgBox("هذا الإجراء سيقوم بحذف كافة البيانات الحالية. المتابعة؟", vbDefaultButton2 + vbExclamation + vbYesNo + vbMsgBoxRight) = MsgBoxResult.Yes Then
@@ -192,16 +187,12 @@ Module Codes
     Function TextfileString() As String
         Dim Save As New System.Text.StringBuilder()
 
-        Save.Append("[اسم المقيم]" & vbTab & vbTab & "[رقم الإقامة]" & vbTab & vbTab & "[تاريخ الإنتهاء]")
+        Save.Append("[رقم الإقامة]" & vbTab & vbTab & "[اسم المقيم]" & vbTab & vbTab & "[تاريخ الإنتهاء]")
         For Each subject As ListViewItem In frmMain.lstData.Items
             Save.Append(Environment.NewLine)
             Save.Append(subject.Text)
             Save.Append(vbTab)
-            Save.Append(vbTab)
-            Save.Append(vbTab)
             Save.Append(subject.SubItems(1).Text)
-            Save.Append(vbTab)
-            Save.Append(vbTab)
             Save.Append(vbTab)
             Save.Append(subject.SubItems(2).Text)
         Next
@@ -225,7 +216,6 @@ Module Codes
         Thingy.Write(My.Resources.Database)
         Thingy.Flush()
         Thingy.Close()
-        Thingy.Dispose()
         Dim Connection As New OdbcConnection("Driver={Microsoft Access Driver (*.mdb)};Dbq=")
         Dim DataAdapter As New OdbcDataAdapter("SELECT * FROM Table1", Connection)
         Dim CommandBuilder As New OdbcCommandBuilder(DataAdapter)

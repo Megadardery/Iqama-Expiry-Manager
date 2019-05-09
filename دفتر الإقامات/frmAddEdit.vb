@@ -6,7 +6,7 @@ Public Class frmAddEdit
         Dim result As DialogResult = MyBase.ShowDialog()
 
         If result = Windows.Forms.DialogResult.OK Then
-            Return {txtName.Text, txtNumber.Text, txtExpiry.Text}
+            Return {txtNumber.Text, txtName.Text, txtExpiry.Text}
         Else
             Return Nothing
         End If
@@ -24,7 +24,7 @@ Public Class frmAddEdit
         Return Dialog()
     End Function
 
-    Public Overloads Function ShowDialog(ByVal Name As String, ByVal Number As String, ByVal Expiry As String) As String()
+    Public Overloads Function ShowDialog(ByVal Number As String, ByVal Name As String, ByVal Expiry As String) As String()
         Dim dtExpiry As Date = Date.ParseExact(Expiry, frmMain.strFormat, Nothing)
 
         Me.Text = "تعديل بيان حالي"
@@ -59,13 +59,13 @@ Public Class frmAddEdit
             Beep()
             Textbox.Text = Textbox.Text.Remove(InStr(Textbox.Text, "|") - 1, 1)
         End If
-        If Trim(txtName.Text) = Nothing Or Trim(txtNumber.Text).Length <> 10 Then Me.btnSave.Enabled = False Else Me.btnSave.Enabled = True
+        If txtName.Text.Trim = "" OrElse txtNumber.Text.Trim.Length <> 10 OrElse Not IsNumeric(txtNumber.Text.Trim) Then Me.btnSave.Enabled = False Else Me.btnSave.Enabled = True
     End Sub
 
     Private Sub frmEdit_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        txtName.Focus()
-        txtName.SelectionStart = txtName.TextLength
-        txtName.SelectionLength = 0
+        txtNumber.Focus()
+        txtNumber.SelectionStart = txtName.TextLength
+        txtNumber.SelectionLength = 0
     End Sub
 
     Dim Month As Integer

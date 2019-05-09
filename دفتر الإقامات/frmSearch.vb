@@ -62,8 +62,8 @@ Public Class frmSearch
 
             End If
 
-            Dim _name As String = frmMain.lstData.Items(counter).Text.ToLower
-            Dim _number As String = frmMain.lstData.Items(counter).SubItems(1).Text
+            Dim _number As String = frmMain.lstData.Items(counter).Text.ToLower
+            Dim _name As String = frmMain.lstData.Items(counter).SubItems(1).Text
             Dim _expiry As String = frmMain.lstData.Items(counter).SubItems(2).Text
 
             If txtName.Text = "" Then strName = _name 'Assign all items to the empty search name field.

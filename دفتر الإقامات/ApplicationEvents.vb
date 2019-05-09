@@ -10,10 +10,12 @@
     Partial Friend Class MyApplication
 
         Private Sub MyApplication_UnhandledException(sender As Object, e As ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
-            MessageBox.Show("Unfortuently, an unhandled error occured. Please report the error to Megadardery@yahoo.com with the following message:" _
-                            & Environment.NewLine & Environment.NewLine & GetExceptionInfo(e.Exception), "Unhandled Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            On Error Resume Next
+            Dim x As String = GetExceptionInfo(e.Exception)
+            MessageBox.Show("Unfortuently, an unhandled error occured. Please report the error to Megadardery@yahoo.com with the following message which has been copied to the clipboard:" _
+                            & Environment.NewLine & Environment.NewLine & x, "Unhandled Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Clipboard.SetText(x)
             e.ExitApplication = True
-
         End Sub
     End Class
 End Namespace

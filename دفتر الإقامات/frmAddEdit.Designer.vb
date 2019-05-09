@@ -22,7 +22,6 @@ Partial Class frmAddEdit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAddEdit))
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -36,17 +35,17 @@ Partial Class frmAddEdit
         'txtName
         '
         Me.txtName.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtName.Location = New System.Drawing.Point(16, 6)
+        Me.txtName.Location = New System.Drawing.Point(16, 44)
         Me.txtName.MaxLength = 255
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(240, 29)
+        Me.txtName.Size = New System.Drawing.Size(234, 29)
         Me.txtName.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(262, 9)
+        Me.Label1.Location = New System.Drawing.Point(262, 47)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 21)
         Me.Label1.TabIndex = 0
@@ -98,7 +97,7 @@ Partial Class frmAddEdit
         'txtNumber
         '
         Me.txtNumber.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNumber.Location = New System.Drawing.Point(16, 41)
+        Me.txtNumber.Location = New System.Drawing.Point(16, 12)
         Me.txtNumber.MaxLength = 10
         Me.txtNumber.Name = "txtNumber"
         Me.txtNumber.Size = New System.Drawing.Size(234, 29)
@@ -108,7 +107,7 @@ Partial Class frmAddEdit
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(256, 44)
+        Me.Label3.Location = New System.Drawing.Point(256, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(76, 21)
         Me.Label3.TabIndex = 6
@@ -130,7 +129,6 @@ Partial Class frmAddEdit
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmAddEdit"

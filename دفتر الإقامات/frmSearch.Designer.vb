@@ -47,7 +47,7 @@ Partial Class frmSearch
         Me.txtExpiryS.Enabled = False
         Me.txtExpiryS.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtExpiryS.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.txtExpiryS.Location = New System.Drawing.Point(339, 28)
+        Me.txtExpiryS.Location = New System.Drawing.Point(209, 24)
         Me.txtExpiryS.MaxDate = New Date(3999, 12, 31, 0, 0, 0, 0)
         Me.txtExpiryS.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.txtExpiryS.Name = "txtExpiryS"
@@ -56,10 +56,10 @@ Partial Class frmSearch
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(136, 196)
+        Me.btnCancel.Location = New System.Drawing.Point(136, 184)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(68, 22)
         Me.btnCancel.TabIndex = 4
@@ -77,9 +77,9 @@ Partial Class frmSearch
         '
         'btnNext
         '
-        Me.btnNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnNext.Font = New System.Drawing.Font("Times New Roman", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNext.Location = New System.Drawing.Point(12, 182)
+        Me.btnNext.Location = New System.Drawing.Point(12, 170)
         Me.btnNext.Name = "btnNext"
         Me.btnNext.Size = New System.Drawing.Size(118, 36)
         Me.btnNext.TabIndex = 3
@@ -91,7 +91,7 @@ Partial Class frmSearch
         Me.lblExpiry.AutoSize = True
         Me.lblExpiry.Enabled = False
         Me.lblExpiry.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblExpiry.Location = New System.Drawing.Point(489, 34)
+        Me.lblExpiry.Location = New System.Drawing.Point(359, 30)
         Me.lblExpiry.Name = "lblExpiry"
         Me.lblExpiry.Size = New System.Drawing.Size(47, 21)
         Me.lblExpiry.TabIndex = 0
@@ -102,9 +102,9 @@ Partial Class frmSearch
         Me.grbName.Controls.Add(Me.chkExact)
         Me.grbName.Controls.Add(Me.txtName)
         Me.grbName.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grbName.Location = New System.Drawing.Point(299, 12)
+        Me.grbName.Location = New System.Drawing.Point(143, 12)
         Me.grbName.Name = "grbName"
-        Me.grbName.Size = New System.Drawing.Size(281, 92)
+        Me.grbName.Size = New System.Drawing.Size(281, 78)
         Me.grbName.TabIndex = 0
         Me.grbName.TabStop = False
         Me.grbName.Text = "اسم المقيم"
@@ -112,26 +112,27 @@ Partial Class frmSearch
         'chkExact
         '
         Me.chkExact.AutoSize = True
+        Me.chkExact.BackColor = System.Drawing.Color.Transparent
         Me.chkExact.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkExact.Location = New System.Drawing.Point(160, 65)
+        Me.chkExact.Location = New System.Drawing.Point(159, 58)
         Me.chkExact.Name = "chkExact"
         Me.chkExact.Size = New System.Drawing.Size(115, 21)
         Me.chkExact.TabIndex = 1
         Me.chkExact.Text = "نفس الاسم بالضبط"
-        Me.chkExact.UseVisualStyleBackColor = True
+        Me.chkExact.UseVisualStyleBackColor = False
         '
         'grbDate
         '
         Me.grbDate.Controls.Add(Me.chkRange)
         Me.grbDate.Controls.Add(Me.chkDates)
         Me.grbDate.Controls.Add(Me.txtExpiryE)
-        Me.grbDate.Controls.Add(Me.lblTo)
         Me.grbDate.Controls.Add(Me.txtExpiryS)
+        Me.grbDate.Controls.Add(Me.lblTo)
         Me.grbDate.Controls.Add(Me.lblExpiry)
         Me.grbDate.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grbDate.Location = New System.Drawing.Point(12, 110)
+        Me.grbDate.Location = New System.Drawing.Point(12, 97)
         Me.grbDate.Name = "grbDate"
-        Me.grbDate.Size = New System.Drawing.Size(568, 66)
+        Me.grbDate.Size = New System.Drawing.Size(412, 66)
         Me.grbDate.TabIndex = 1
         Me.grbDate.TabStop = False
         Me.grbDate.Text = "   تاريخ انتهاء الإقامة"
@@ -141,7 +142,7 @@ Partial Class frmSearch
         Me.chkRange.AutoSize = True
         Me.chkRange.Enabled = False
         Me.chkRange.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkRange.Location = New System.Drawing.Point(6, 17)
+        Me.chkRange.Location = New System.Drawing.Point(0, 2)
         Me.chkRange.Name = "chkRange"
         Me.chkRange.Size = New System.Drawing.Size(48, 21)
         Me.chkRange.TabIndex = 2
@@ -152,7 +153,7 @@ Partial Class frmSearch
         '
         Me.chkDates.AutoSize = True
         Me.chkDates.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkDates.Location = New System.Drawing.Point(546, 4)
+        Me.chkDates.Location = New System.Drawing.Point(389, 4)
         Me.chkDates.Name = "chkDates"
         Me.chkDates.Size = New System.Drawing.Size(15, 14)
         Me.chkDates.TabIndex = 2
@@ -163,7 +164,7 @@ Partial Class frmSearch
         Me.txtExpiryE.CustomFormat = "MM / yyyy"
         Me.txtExpiryE.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtExpiryE.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.txtExpiryE.Location = New System.Drawing.Point(99, 28)
+        Me.txtExpiryE.Location = New System.Drawing.Point(24, 24)
         Me.txtExpiryE.MaxDate = New Date(3999, 12, 31, 0, 0, 0, 0)
         Me.txtExpiryE.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.txtExpiryE.Name = "txtExpiryE"
@@ -175,7 +176,7 @@ Partial Class frmSearch
         '
         Me.lblTo.AutoSize = True
         Me.lblTo.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTo.Location = New System.Drawing.Point(249, 31)
+        Me.lblTo.Location = New System.Drawing.Point(174, 30)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(29, 21)
         Me.lblTo.TabIndex = 3
@@ -188,25 +189,27 @@ Partial Class frmSearch
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(281, 92)
+        Me.GroupBox1.Size = New System.Drawing.Size(125, 78)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "رقم الإقامة"
         '
         'txtNumber
         '
+        Me.txtNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtNumber.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNumber.Location = New System.Drawing.Point(6, 28)
         Me.txtNumber.MaxLength = 10
         Me.txtNumber.Name = "txtNumber"
-        Me.txtNumber.Size = New System.Drawing.Size(269, 29)
+        Me.txtNumber.Size = New System.Drawing.Size(113, 29)
         Me.txtNumber.TabIndex = 0
         '
         'frmSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(590, 230)
+        Me.ClientSize = New System.Drawing.Size(435, 212)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grbDate)
         Me.Controls.Add(Me.grbName)
@@ -220,6 +223,7 @@ Partial Class frmSearch
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "بحث"
+        Me.TopMost = True
         Me.grbName.ResumeLayout(False)
         Me.grbName.PerformLayout()
         Me.grbDate.ResumeLayout(False)
